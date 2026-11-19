@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wishlist - PAYZEE</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+
+      .container {
+        max-width: 1400px;
+        margin: 40px auto;
+        padding: 0 30px;
+      }
+
+      .wishlist-card {
+        background: var(--card-blue);
+        border-radius: var(--radius-lg);
+        padding: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .section-title {
+        font-size: 28px;
+        font-weight: 800;
+        margin-bottom: 30px;
+        text-align: center;
+        color: var(--text-dark);
+      }
+
+      /* ---------- Input Section ---------- */
+
+      .wishlist-inputs {
+        margin-bottom: 35px;
+      }
+
+      .input-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .input-item {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .input-item label {
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--text-dark);
+      }
+
+      .input-item input {
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+        font-family: inherit;
+        font-size: 13px;
+      }
+
+      .input-item input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+      }
+
+      /* ---------- Add Button ---------- */
+
+      .add-btn {
+        background: white;
+        padding: 16px;
+        border-radius: var(--radius-pill);
+        border: none;
+        font-weight: 800;
+        font-size: 15px;
+        cursor: pointer;
+        transition: var(--transition);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        max-width: 260px;
+        margin: auto;
+
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      .add-btn:hover {
+        background: var(--text-dark);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .wishlist-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-height: 500px;
+        overflow-y: auto;
+        padding-right: 5px;
+      }
+      .wishlist-item {
+        background: white;
+        padding: 20px 25px 15px;
+        border-radius: 20px;
+        transition: var(--transition);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      .wishlist-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+
+
+      .item-header {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr 40px;
+        gap: 20px;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .item-field {
+        text-align: center;
+      }
+
+      .field-label {
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--text-light);
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+      }
+
+      .field-value {
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--text-dark);
+      }
+
+      .delete-icon {
+        cursor: pointer;
+        font-size: 18px;
+        color: #ef4444;
+        transition: var(--transition);
+      }
+
+      .delete-icon:hover {
+        transform: scale(1.1);
+        color: #dc2626;
+      }
+
+      .edit-icon {
+        cursor: pointer;
+        font-size: 18px;
+        color: #10b981;
+        transition: var(--transition);
+        margin-right: 10px;
+      }
+
+      .edit-icon:hover {
+        transform: scale(1.1);
+        color: #059669;
+      }
+
+      /* ---------- Progress ---------- */
+
+      .progress-wrapper {
+        margin-bottom: 8px;
+      }
+
+      .progress-track {
+        width: 100%;
+        height: 8px;
+        background: #e2e8f0;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: var(--primary);
+        border-radius: 10px;
+        transition: width 0.4s;
+      }
+
+      .saved-amount {
+        text-align: right;
+        font-size: 12px;
+        font-weight: 800;
+        color: #10b981;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 15px;
+        }
+
+        .wishlist-card {
+          padding: 25px;
+        }
+
+        .input-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .item-header {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .item-field {
+          text-align: left;
+        }
+
+        .saved-amount {
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="header">
+      <h1>PAYZEE</h1>
+
+      <div class="header-controls">
+        <a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+            <a href="transaction.html" class="nav-link"><i class="fas fa-credit-card"></i> Transactions</a>
+            <a href="budget.html" class="nav-link"><i class="fas fa-dollar-sign"></i> Budget</a>
+            <a href="wishlist.html" class="nav-link active"><i class="fas fa-clipboard-list"></i> Wishlist</a>
+            <a href="#" onclick="window.location.href='logout.php'" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="wishlist-card">
+        <h2 class="section-title">Wishlist Saving</h2>
+        <form id="wishlistForm" class="wishlist-inputs">
+          <div class="input-grid">
+            <div class="input-item">
+              <label>Target Date</label>
+              <input type="date" id="wishlistDate" required />
+            </div>
+
+            <div class="input-item">
+              <label>Description</label>
+              <input type="text" id="wishlistDescription" placeholder="Trip to Tokyo" required
+                pattern="^[A-Za-z ]+$"
+              title="Only letters allowed"
+              />
+            </div>
+
+            <div class="input-item">
+              <label>Target Amount</label>
+              <input
+                type="number"
+                id="wishlistAmount"
+                placeholder="$0"
+                required
+              />
+            </div>
+
+            <div class="input-item">
+              <label>Current Savings</label>
+              <input type="number" id="wishlistSaved" value="0" required />
+            </div>
+          </div>
+
+          <div class="wishlist-list"></div>
+
+          <button class="add-btn" type="submit">
+            <i class="fas fa-plus-circle"></i>
+            Add Wishlist
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script src="storage.js"></script>
+    <script src="wishlist.js"></script>
+  </body>
+</html>

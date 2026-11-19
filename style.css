@@ -1,0 +1,108 @@
+:root {
+    --primary: #3b82f6;
+    --bg-page: #f8fafc;
+    --card-blue: #e0f2fe;
+    --chart-bg: #c9dfe7;
+    --item-green: #8ac89f;
+    --item-red: #f0a5a5;
+    --text-dark: #1e293b;
+    --text-light: #64748b;
+    --radius-lg: 30px;
+    --radius-pill: 50px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-dark);
+    min-height: 100vh;
+}
+
+.header {
+    background: white;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -1px;
+}
+
+.header-controls {
+    display: flex;
+    gap: 12px;
+    background: #f1f5f9;
+    padding: 6px;
+    border-radius: var(--radius-pill);
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-light);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: var(--radius-pill);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-link:hover {
+    color: var(--primary);
+}
+
+.nav-link.active {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+

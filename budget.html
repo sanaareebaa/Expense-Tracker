@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Budget - PAYZEE</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 25px;
+      }
+
+      .card {
+        background: var(--card-blue);
+        border-radius: var(--radius-lg);
+        padding: 25px;
+
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        min-height: 350px;
+      }
+
+      .card-title {
+        font-size: 22px;
+        font-weight: 800;
+        margin-bottom: 25px;
+        color: var(--text-dark);
+        text-align: center;
+      }
+
+      .expense-list,
+      .budget-list {
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+
+      .expense-item {
+        background: var(--item-green);
+        padding: 12px 20px;
+        border-radius: var(--radius-pill);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: var(--transition);
+      }
+
+      .expense-item.loan {
+        background: var(--item-red);
+      }
+
+        .expense-title {
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .expense-subtitle {
+            font-size: 11px;
+        font-weight: 600;
+        opacity: 0.7;
+      }
+
+      .expense-amount {
+        font-size: 18px;
+        font-weight: 800;
+      }
+
+      .add-btn {
+        background: white;
+        color: var(--text-dark);
+        padding: 14px;
+        border-radius: var(--radius-pill);
+        border: none;
+        font-weight: 800;
+        font-size: 14px;
+        cursor: pointer;
+        transition: var(--transition);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .add-btn:hover {
+        background: var(--text-dark);
+        color: white;
+      }
+
+      .budget-item {
+        background: white;
+        padding: 20px;
+        border-radius: 20px;
+        position: relative;
+      }
+
+      .progress-container {
+        height: 8px;
+        background: #f1f5f9;
+        border-radius: 10px;
+        margin: 12px 0;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        background: var(--primary);
+        border-radius: 10px;
+        transition: width 0.6s ease;
+      }
+
+      .budget-item .fa-trash {
+        position: absolute;
+        top: 10px;
+            right: 10px;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .budget-item .fa-trash:hover {
+          color: #dc2626;
+        }
+
+        .input-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 14px;
+          margin-bottom: 20px;
+        }
+        .input-item {
+          background: white;
+          padding: 12px 16px;
+          border-radius: 12px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          transition: var(--transition);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .input-icon {
+          font-size: 20px;
+          width: 26px;
+          display: flex;
+          justify-content: center;
+        }
+
+        .input-icon.blue {
+          color: var(--primary);
+        }
+
+        .input-icon.green {
+          color: #10b981;
+        }
+
+        .input-icon.orange {
+            color: #f97316;
+        }
+
+        .input-icon.yellow {
+            color: #eab308;
+        }
+
+        .input-label {
+          font-weight: 700;
+          font-size: 13px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .input-item .input-field {
+          flex: 1;
+          width: 100%;
+          border: 1px solid #e0e0e0;
+          border-radius: 8px;
+          padding: 6px 10px;
+          font-size: 13px;
+          font-family: inherit;
+        }
+
+        .input-item .input-field:focus {
+          outline: none;
+          border-color: var(--primary);
+          box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        .button-group {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+
+        .btn {
+          padding: 14px;
+          border-radius: 10px;
+          border: none;
+          background: white;
+          font-weight: 800;
+          font-size: 13px;
+          cursor: pointer;
+          transition: var(--transition);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+          display: flex;
+          align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn#btndebt {
+            color: #ef4444;
+        }
+
+        .btn#btnsavings {
+            color: #10b981;
+        }
+
+        @media (max-width: 1024px) {
+          .container {
+            grid-template-columns: 1fr;
+          }
+        }
+
+    </style>
+  </head>
+
+  <body>
+    <nav class="header">
+      <h1>PAYZEE</h1>
+      <div class="header-controls">
+        <a href="dashboard.html" class="nav-link">
+          <i class="fas fa-home"></i> Home
+        </a>
+        <a href="transaction.html" class="nav-link">
+          <i class="fas fa-credit-card"></i> Transactions
+        </a>
+        <a href="budget.html" class="nav-link active">
+          <i class="fas fa-dollar-sign"></i> Budget
+        </a>
+        <a href="wishlist.html" class="nav-link">
+          <i class="fas fa-clipboard-list"></i> Wishlist
+        </a>
+        <a href="#" onclick="window.location.href='logout.php'" class="nav-link">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="card">
+        <h2 class="card-title">Fixed Expenses</h2>
+        <form id="expenseform">
+          <div class="input-grid">
+            <div class="input-item">
+              <div class="input-label">
+                <div class="input-icon blue">
+                  <i class="fas fa-dollar-sign"></i>
+                </div>
+                Amount
+              </div>
+              <input type="number" placeholder="Enter amount" id="expenseAmount" class="input-field" />
+            </div>
+            <div class="input-item">
+              <div class="input-label">
+                <div class="input-icon blue">
+                  <i class="fas fa-calendar-alt"></i>
+                </div>
+                Month
+              </div>
+              <input type="number" placeholder="Enter month (1-12)" id="expenseMonth" class="input-field" />
+            </div>
+          </div>
+        </form>
+
+        <div class="expense-list"></div>
+        <div class="button-group">
+          <button class="btn" id="btndebt" onclick="logdebt()">
+            <i class="fas fa-plus-circle"></i> Log Debt
+          </button>
+          <button class="btn" id="btnsavings" onclick="logsavings()">
+            <i class="fas fa-plus-circle"></i> Log savings
+          </button>
+        </div>
+      </div>
+
+            <div class="card">
+                <h2 class="card-title">Budget Categories</h2>
+                <form id="budgetform">
+                    <div class="input-grid">
+                        <div class="input-item">
+                            <div class="input-label">
+                                <div class="input-icon blue"><i class="fa-solid fa-piggy-bank"></i></div>
+                                Budget Amount
+                            </div>
+                            <input type="number" placeholder="Enter amount" id="budgetAmount" class="input-field">
+                        </div>
+                        <div class="input-item">
+                            <div class="input-label">
+                                <div class="input-icon green"><i class="fas fa-tag"></i></div>
+                                Category
+                            </div>
+                            <select class="input-field" id="budgetCategory">
+                                <option value="" disabled selected>Select category</option>
+                                <option value="Food">Food</option>
+                                <option value="Transport">Transport</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Utilities">Utilities</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <div class="budget-list">
+
+                </div>
+                <button class="add-btn" id="addBudgetBtn" onclick="logbudget()">
+                    <i class="fas fa-plus-circle"></i> Add Budget
+                </button>
+            </div>
+        </div>
+        <script src="budget.js">
+            
+
+        </script>
+<script src =storage.js></script>
+
+</body>
+
+</html>
